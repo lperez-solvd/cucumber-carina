@@ -29,7 +29,7 @@ public class GSMArenaNewsSteps extends CucumberRunner {
         homePage.open();
         return homePage.isPageOpened();
     }
-    
+
     @When("^I open 'News' page$")
     public void iOpenNewsPage()  {
         newsPage = homePage.getFooterMenu().openNewsPage();

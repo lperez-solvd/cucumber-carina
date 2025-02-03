@@ -32,6 +32,12 @@ public class HomePage extends AbstractPage {
     @FindBy(className = "news-column-index")
     private ExtendedWebElement newsColumn;
 
+    @FindBy(id = "topsearch-text")
+    private ExtendedWebElement searchInput;
+
+    @FindBy(xpath = "//*[@class = 'search-buttons']//a")
+    private ExtendedWebElement inputButton;
+
     public HomePage(WebDriver driver) {
         super(driver);
         setUiLoadedMarker(newsColumn);
@@ -58,6 +64,15 @@ public class HomePage extends AbstractPage {
     public WeValuePrivacyAd getWeValuePrivacyAd() {
     	return new WeValuePrivacyAd(driver);
     }
+
+    public SearchResultsPage searchSomething (String text) {
+        searchInput.click();
+        searchInput.type(text);
+        waitUntil(d -> inputButton.isElementPresent(20),20);
+        inputButton.click();
+        return new SearchResultsPage(driver);
+    }
+
 
     @Override
     public void open() {
