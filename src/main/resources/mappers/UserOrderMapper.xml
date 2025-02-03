@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.solvd.saucedemo.mappers.UserOrderMapper">
+    <select id="getUserOrderById" parameterType="int" resultType="com.solvd.saucedemo.models.UserOrder">
+        SELECT * FROM UserOrder WHERE id = #{id}
+    </select>
+
+    <select id="getAllUserOrders" resultType="com.solvd.saucedemo.models.UserOrder">
+        SELECT * FROM UserOrder
+    </select>
+
+    <!-- ResultMap to map the UserOrder and its associated Products -->
+    <resultMap id="userOrderResultMap" type="com.solvd.saucedemo.models.UserOrder">
+        <id property="id" column="order_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="orderDate" column="order_date"/>
+
+        <!-- Collection of Products for this UserOrder -->
+        <collection property="products" ofType="com.solvd.saucedemo.models.Product">
+            <result property="id" column="product_id"/>
+            <result property="name" column="product_name"/>
+            <result property="price" column="product_price"/>
+        </collection>
+    </resultMap>
+
+    <!-- SQL Query to fetch a UserOrder by ID with its associated Products -->
+    <select id="getUserOrderWithProducts" resultMap="userOrderResultMap">
+        SELECT u.id AS order_id, u.user_id, u.order_date, p.id AS product_id, p.name AS product_name, p.price AS
+        product_price
+        FROM UserOrder u
+        JOIN order_product op ON u.id = op.order_id
+        JOIN Product p ON op.product_id = p.id
+        WHERE u.id = #{orderId}
+    </select>
+
+    <!-- SQL Query to fetch all UserOrders with their associated Products -->
+    <select id="getAllUserOrdersWithProducts" resultMap="userOrderResultMap">
+        SELECT u.id AS order_id, u.user_id, u.order_date, p.id AS product_id, p.name AS product_name, p.price AS
+        product_price
+        FROM UserOrder u
+        JOIN order_product op ON u.id = op.order_id
+        JOIN Product p ON op.product_id = p.id
+    </select>
+
+</mapper>
