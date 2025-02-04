@@ -1,4 +1,4 @@
-package saucedemo.mybatis_test;
+package com.solvd.saucedemo.mybatis_test;
 
 
 import com.solvd.saucedemo.mappers.UserOrderMapper;
@@ -25,7 +25,7 @@ public class MyBatisTest {
 
                 // Get the first UserOrder for userId = 0
                 List<UserOrder> orders = userOrderMapper.getAllUserOrdersWithProducts();
-                UserOrder firstOrder = orders.isEmpty() ? null : orders.get(0);  // Getting the first order, if any
+                UserOrder firstOrder = orders.isEmpty() ? null : orders.get(1);  // Getting the first order, if any
 
                 // Print the first order to the console
                 if (firstOrder != null) {

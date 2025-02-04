@@ -24,4 +24,8 @@ public class CartPage extends AbstractPage {
         checkOutButton.click();
         return new CheckOutPage(driver);
     }
+
+    public List<InventoryItem> getAllCartItems () {
+        return addedItems;
+    }
 }

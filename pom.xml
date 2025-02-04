@@ -60,7 +60,7 @@
 
 		<dependency>
 			<!--we need it to reuse benefits of zebrunner testng agent for webdriver
-				sesssion(s) declaration -->
+				session(s) declaration -->
 			<groupId>net.bytebuddy</groupId>
 			<artifactId>byte-buddy</artifactId>
 			<version>1.12.10</version>

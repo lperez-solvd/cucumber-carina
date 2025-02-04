@@ -16,6 +16,30 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "login-button")
     ExtendedWebElement loginButton;
 
+    public ExtendedWebElement getUserInput() {
+        return userInput;
+    }
+
+    public void setUserInput(ExtendedWebElement userInput) {
+        this.userInput = userInput;
+    }
+
+    public ExtendedWebElement getPasswordInput() {
+        return passwordInput;
+    }
+
+    public void setPasswordInput(ExtendedWebElement passwordInput) {
+        this.passwordInput = passwordInput;
+    }
+
+    public ExtendedWebElement getLoginButton() {
+        return loginButton;
+    }
+
+    public void setLoginButton(ExtendedWebElement loginButton) {
+        this.loginButton = loginButton;
+    }
+
     public LoginPage(WebDriver driver) {
         super(driver);
     }

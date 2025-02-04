@@ -8,20 +8,17 @@ import org.openqa.selenium.support.FindBy;
 
 public class InventoryItem extends AbstractUIObject {
 
-    @FindBy(xpath = "//div[@data-test = 'inventory-item-name']")
+    @FindBy(xpath = ".//div[@data-test = 'inventory-item-name']")
     ExtendedWebElement itemName;
 
-    @FindBy(xpath = "//div[@data-test = 'inventory-item-price']")
+    @FindBy(xpath = ".//div[@data-test = 'inventory-item-price']")
     ExtendedWebElement itemPrice;
 
-    @FindBy(xpath = "//div[@class = 'pricebar']//button")
+    @FindBy(xpath = ".//div[@class = 'pricebar']//button")
     ExtendedWebElement addItemButton;
 
-    protected InventoryItem(WebDriver driver) {
-        super(driver);
-    }
 
-    protected InventoryItem(WebDriver driver, SearchContext searchContext) {
+    public InventoryItem(WebDriver driver, SearchContext searchContext) {
         super(driver, searchContext);
     }
 
@@ -41,5 +38,13 @@ public class InventoryItem extends AbstractUIObject {
 
     private double parseTextToDouble(String text) {
         return Double.parseDouble(text.replace("$", ""));
+    }
+
+    @Override
+    public String toString() {
+        return "InventoryItem{" +
+                "itemName=" + getItemName() +
+                ", itemPrice=" + getItemPrice() +
+                '}';
     }
 }
