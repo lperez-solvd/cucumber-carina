@@ -12,4 +12,6 @@ public interface UserOrderMapper {
     UserOrder getUserOrderWithProducts(int orderId);
 
     List<UserOrder> getAllUserOrdersWithProducts();
+
+    List<UserOrder> getUserOrdersByUserId(int userId);
 }

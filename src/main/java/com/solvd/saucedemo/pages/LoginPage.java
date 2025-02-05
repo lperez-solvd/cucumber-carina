@@ -16,6 +16,9 @@ public class LoginPage extends AbstractPage {
     @FindBy(id = "login-button")
     ExtendedWebElement loginButton;
 
+    @FindBy(xpath = "//h3[@data-test = 'error']")
+    ExtendedWebElement failMessage;
+
     public ExtendedWebElement getUserInput() {
         return userInput;
     }
@@ -55,6 +58,10 @@ public class LoginPage extends AbstractPage {
     public HomePage clickLoginButton() {
         loginButton.click();
         return new HomePage(driver);
+    }
+
+    public boolean loginHasFailed() {
+        return failMessage.isElementPresent();
     }
 
     private void enterTextToInput(ExtendedWebElement input, String text) {

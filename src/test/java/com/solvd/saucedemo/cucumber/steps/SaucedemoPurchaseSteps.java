@@ -6,12 +6,14 @@ import com.solvd.saucedemo.models.Product;
 import com.solvd.saucedemo.models.User;
 import com.solvd.saucedemo.models.UserOrder;
 import com.solvd.saucedemo.pages.*;
+import com.solvd.saucedemo.utils.UtilsSQL;
 import io.cucumber.java.Before;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
 import io.cucumber.java.en.When;
 import org.testng.Assert;
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -27,21 +29,24 @@ public class SaucedemoPurchaseSteps extends SaucedemoBaseTest {
     User testUser = null;
     UserOrder userOrder = null;
 
-    @Before
+  /*  @Before
     public void setup() {
-        testUser = getUserByIdSQL(1);
-        userOrder = getOrderByIdSQL(1);
+        testUser = UtilsSQL.getUserByIdSQL(1);
+        userOrder = UtilsSQL.getOrderByIdSQL(3);
+
         if (testUser == null) {
             throw new RuntimeException("Test user not found in database!");
         }
+
         if (userOrder == null) {
             throw new RuntimeException("Order not found in database!");
         }
 
-    }
+    }*/
 
-    @Given("^I am logged in")
-    public boolean iAmOnMainPage() {
+    @Given("I am logged in with {string}")
+    public boolean iAmLoggedIn(String userID) {
+        testUser = UtilsSQL.getUserByIdSQL(Integer.parseInt(userID));
         loginPage = new LoginPage(getDriver());
         loginPage.open();
         loginPage.enterUserName(testUser.getName());
@@ -50,9 +55,10 @@ public class SaucedemoPurchaseSteps extends SaucedemoBaseTest {
         return homePage.isPageOpened();
     }
 
-    @When("^I add products to the cart")
-    public void iAddProductsToTheCart() {
-        List<InventoryItem> items = homePage.getAllItems();
+    @When("I add products to the cart from {string}")
+    public void iAddProductsToTheCart(String orderID) {
+
+        userOrder = UtilsSQL.getOrderByIdSQL(Integer.parseInt(orderID));
 
         List<Product> products = userOrder.getProducts();
         for (Product product : products) {
@@ -69,7 +75,6 @@ public class SaucedemoPurchaseSteps extends SaucedemoBaseTest {
         checkOutPage = cartPage.clickCheckOutButton();
         Assert.assertTrue(checkOutPage.isPageOpened(), "Checkout page is not correctly opened");
     }
-
 
     @And("^I submit my zipping information")
     public void iSubmitMyZippingInformation() {

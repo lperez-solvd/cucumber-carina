@@ -38,4 +38,13 @@
         JOIN Product p ON op.product_id = p.id
     </select>
 
+    <select id="getUserOrdersByUserId" resultMap="userOrderResultMap">
+        SELECT u.id AS order_id, u.user_id, u.order_date,
+        p.id AS product_id, p.name AS product_name, p.price AS product_price
+        FROM UserOrder u
+        JOIN order_product op ON u.id = op.order_id
+        JOIN Product p ON op.product_id = p.id
+        WHERE u.user_id = #{userId}
+    </select>
+
 </mapper>
