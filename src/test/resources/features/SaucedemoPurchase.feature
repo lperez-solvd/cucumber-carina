@@ -5,6 +5,7 @@ Feature: Sauce Demo Purchase test
   Scenario Outline: Purchase items with a user and order
 
     Given I am logged in with "<userID>"
+    Then I should be on the homepage
     When I add products to the cart from "<orderID>"
     And I go to checkout
     And I submit my zipping information
@@ -13,7 +14,7 @@ Feature: Sauce Demo Purchase test
 
     Examples:
       | userID | orderID |
-      | 1      | 1     |
-      | 1      | 2     |
-      | 1      | 3     |
-      | 1      | 4     |
+      | 1      | 1       |
+      | 1      | 2       |
+      | 1      | 3       |
+      | 1      | 4       |

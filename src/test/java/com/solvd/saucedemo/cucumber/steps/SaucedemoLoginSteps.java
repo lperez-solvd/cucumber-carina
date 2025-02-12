@@ -18,9 +18,6 @@ public class SaucedemoLoginSteps extends SaucedemoBaseTest {
     LoginPage loginPage = null;
     HomePage homePage = null;
 
-    User testUser = null;
-
-
     @Given("I am on login page")
     public boolean iAmOnMainPage() {
         loginPage = new LoginPage(getDriver());
@@ -28,18 +25,13 @@ public class SaucedemoLoginSteps extends SaucedemoBaseTest {
         return loginPage.isPageOpened();
     }
 
-    @When("I enter my username for {string}")
-    public void iEnterMyUsername(String userId) {
-        testUser = UtilsSQL.getUserByIdSQL(Integer.parseInt(userId));
+    @When("I login with valid credentials for {string}")
+    public void iLoginWithValidCredentials(String userId) {
+        User testUser = UtilsSQL.getUserByIdSQL(Integer.parseInt(userId));
         loginPage.enterUserName(testUser.getName());
+        loginPage.enterPasswordToInput(testUser.getPassword());
         System.out.println("TEST USER: " + loginPage.getUserInput().getText());
         Assert.assertEquals(loginPage.getUserInput().getAttribute("value"), testUser.getName(), "The field is not completed");
-    }
-
-    @And("^I enter my password")
-    public void iEnterMyPassword() {
-        loginPage.enterPasswordToInput(testUser.getPassword());
-        Assert.assertEquals(loginPage.getPasswordInput().getAttribute("value"), testUser.getPassword(), "The field is not completed");
     }
 
     @And("^I submit my information")

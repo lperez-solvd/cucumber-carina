@@ -5,8 +5,7 @@ Feature: Sauce Demo login page
   Scenario Outline: Login with different users
 
     Given I am on login page
-    When I enter my username for "<userID>"
-    And I enter my password
+    When I login with valid credentials for "<userID>"
     And I submit my information
     Then the "<expected>" result should be found
 

@@ -26,33 +26,22 @@ public class SaucedemoPurchaseSteps extends SaucedemoBaseTest {
     CheckOutPage checkOutPage = null;
     SuccessCheckOutPage successCheckOutPage = null;
 
-    User testUser = null;
     UserOrder userOrder = null;
 
-  /*  @Before
-    public void setup() {
-        testUser = UtilsSQL.getUserByIdSQL(1);
-        userOrder = UtilsSQL.getOrderByIdSQL(3);
-
-        if (testUser == null) {
-            throw new RuntimeException("Test user not found in database!");
-        }
-
-        if (userOrder == null) {
-            throw new RuntimeException("Order not found in database!");
-        }
-
-    }*/
 
     @Given("I am logged in with {string}")
-    public boolean iAmLoggedIn(String userID) {
-        testUser = UtilsSQL.getUserByIdSQL(Integer.parseInt(userID));
+    public void iAmLoggedIn(String userID) {
+        User testUser = UtilsSQL.getUserByIdSQL(Integer.parseInt(userID));
         loginPage = new LoginPage(getDriver());
         loginPage.open();
         loginPage.enterUserName(testUser.getName());
         loginPage.enterPasswordToInput(testUser.getPassword());
         homePage = loginPage.clickLoginButton();
-        return homePage.isPageOpened();
+    }
+
+    @Then("I should be on the homepage")
+    public void iShouldBeOnTheHomepage() {
+        Assert.assertTrue(homePage.isPageOpened(), "Login failed, home page not opened");
     }
 
     @When("I add products to the cart from {string}")
