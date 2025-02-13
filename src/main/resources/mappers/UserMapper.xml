@@ -8,8 +8,4 @@
         SELECT id, name, password FROM User WHERE id = #{id}
     </select>
 
-    <select id="getAllUsers" resultType="com.solvd.saucedemo.models.User">
-        SELECT * FROM User
-    </select>
-
 </mapper>

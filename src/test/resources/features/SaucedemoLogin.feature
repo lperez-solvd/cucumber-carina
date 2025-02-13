@@ -6,6 +6,7 @@ Feature: Sauce Demo login page
 
     Given I am on login page
     When I login with valid credentials for "<userID>"
+    Then The username and password fields should be correctly filled with "<userID>"
     And I submit my information
     Then the "<expected>" result should be found
 

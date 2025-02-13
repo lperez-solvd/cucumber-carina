@@ -5,46 +5,40 @@
 
 <mapper namespace="com.solvd.saucedemo.mappers.UserOrderMapper">
 
-
+    <!-- Result map for UserOrder without products -->
     <resultMap id="userOrderResultMap" type="com.solvd.saucedemo.models.UserOrder">
         <id property="id" column="order_id"/>
         <result property="userId" column="user_id"/>
         <result property="orderDate" column="order_date"/>
-
-
-        <collection property="products" ofType="com.solvd.saucedemo.models.Product">
-            <result property="id" column="product_id"/>
-            <result property="name" column="product_name"/>
-            <result property="price" column="product_price"/>
-        </collection>
     </resultMap>
 
+    <!-- Result map for Product -->
+    <resultMap id="productResultMap" type="com.solvd.saucedemo.models.Product">
+        <id property="id" column="product_id"/>
+        <result property="name" column="product_name"/>
+        <result property="price" column="product_price"/>
+    </resultMap>
 
+    <!-- Fetch UserOrder details without products -->
     <select id="getUserOrderById" resultMap="userOrderResultMap">
-        SELECT u.id AS order_id, u.user_id, u.order_date,
-        p.id AS product_id, p.name AS product_name, p.price AS product_price
-        FROM UserOrder u
-        JOIN order_product op ON u.id = op.order_id
-        JOIN Product p ON op.product_id = p.id
-        WHERE u.id = #{id}
+        SELECT id AS order_id, user_id, order_date
+        FROM UserOrder
+        WHERE id = #{id}
     </select>
 
-
-    <select id="getAllUserOrders" resultMap="userOrderResultMap">
-        SELECT u.id AS order_id, u.user_id, u.order_date,
-        p.id AS product_id, p.name AS product_name, p.price AS product_price
-        FROM UserOrder u
-        JOIN order_product op ON u.id = op.order_id
+    <!-- Fetch products for a specific order -->
+    <select id="getProductsByOrderId" resultMap="productResultMap">
+        SELECT p.id AS product_id, p.name AS product_name, p.price AS product_price
+        FROM order_product op
         JOIN Product p ON op.product_id = p.id
+        WHERE op.order_id = #{orderId}
     </select>
 
+    <!-- Fetch orders by UserId without products -->
     <select id="getUserOrdersByUserId" resultMap="userOrderResultMap">
-        SELECT u.id AS order_id, u.user_id, u.order_date,
-        p.id AS product_id, p.name AS product_name, p.price AS product_price
-        FROM UserOrder u
-        JOIN order_product op ON u.id = op.order_id
-        JOIN Product p ON op.product_id = p.id
-        WHERE u.user_id = #{userId}
+        SELECT id AS order_id, user_id, order_date
+        FROM UserOrder
+        WHERE user_id = #{userId}
     </select>
 
 </mapper>

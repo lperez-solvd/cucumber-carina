@@ -8,5 +8,4 @@ public interface UserMapper {
 
     User getUserById(int id);
 
-    List<User> getAllUsers();
 }

@@ -7,9 +7,10 @@ Feature: Sauce Demo Purchase test
     Given I am logged in with "<userID>"
     Then I should be on the homepage
     When I add products to the cart from "<orderID>"
+    Then Products should be on cart for "<orderID>"
     And I go to checkout
     And I submit my zipping information
-    And I confirm my purchase
+    And I confirm my purchase for "<orderID>"
     Then page successful should open
 
     Examples:
