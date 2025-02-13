@@ -41,7 +41,7 @@ public class SaucedemoLoginSteps extends SaucedemoBaseTest {
     @And("I submit my information")
     public void iSubmitMyInformation() {
         LoginPage loginPage = new LoginPage(getDriver());
-        HomePage homePage = loginPage.clickLoginButton();
+        loginPage.clickLoginButton();
     }
 
     @Then("the {string} result should be found")
