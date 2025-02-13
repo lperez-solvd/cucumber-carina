@@ -1,0 +1,18 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="Saucedemo Test Suite" parallel="classes" thread-count="3">
+
+    <test name="Chrome - Parallel Login Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.solvd.saucedemo.SaucedemoLoginTests"/>
+        </classes>
+    </test>
+
+    <test name="Chrome - Parallel Purchase Tests">
+        <parameter name="browser" value="chrome"/>
+        <classes>
+            <class name="com.solvd.saucedemo.SaucedemoPurchaseTests"/>
+        </classes>
+    </test>
+
+</suite>

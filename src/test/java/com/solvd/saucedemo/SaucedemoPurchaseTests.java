@@ -8,6 +8,6 @@ import io.cucumber.testng.CucumberOptions;
         glue = "com.solvd.saucedemo.cucumber.steps",
         plugin = {"pretty", "html:target/cucumber-report.html"}
 )
-public class SauceDemoPurchaseTest extends CucumberBaseTest {
+public class SaucedemoPurchaseTests extends CucumberBaseTest {
 
 }
